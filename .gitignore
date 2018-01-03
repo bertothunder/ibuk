@@ -1,0 +1,8 @@
+__pycache__/
+/.idea/
+/bin/
+/include/
+/lib/
+pip-selfcheck.json
+.Python
+idea.properties

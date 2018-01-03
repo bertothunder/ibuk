@@ -1,0 +1,1 @@
+from ibuk.api.resources.ebooks import EbooksResource
