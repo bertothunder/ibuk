@@ -1,4 +1,5 @@
 __pycache__/
+ebooks.db
 /.idea/
 /bin/
 /include/

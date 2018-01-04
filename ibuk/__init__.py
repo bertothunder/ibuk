@@ -1,1 +1,1 @@
-from ibuk.main import app, api
+from ibuk import main
