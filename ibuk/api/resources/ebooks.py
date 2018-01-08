@@ -1,7 +1,8 @@
 from collections import namedtuple
 from flask_restful import Resource
 from flask import jsonify, request
-from ibuk.common import EBookReadSchema, Ebook
+from ibuk.common import EBookReadSchema, EBookCreateSchema, Ebook
+from ibuk.api.errors import bad_request
 from operator import attrgetter
 import json
 
@@ -27,6 +28,22 @@ def select_with_filters(filters):
     return query
 
 
+def process_creation(request, create=False):
+    ebook_data = json.loads(request.data)
+    if not ebook_data or 'e-book' not in ebook_data:
+        return bad_request('No e-book data provided')
+    data = ebook_data['e-book']
+    try:
+        ebook, errors = EBookCreateSchema().load(data)
+        if errors:
+            return errors, 422
+        if not ebook:
+            return "Invalid request", 422
+        schema = EBookReadSchema()
+        return schema.dump(ebook), 200
+    except Exception as e:
+        return e, 422
+
 
 class EbooksResource(Resource):
     """
@@ -38,7 +55,11 @@ class EbooksResource(Resource):
         Manages the creation of a new ebook in the database. The ebook comes as part of the data.
         :return:
         """
-        pass
+        if not request.data or not request.files:
+            return bad_request('Missing JSON payload of file content')
+
+        process_creation(request)
+
 
     def get(self):
         """
