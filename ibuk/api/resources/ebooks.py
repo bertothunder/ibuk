@@ -8,13 +8,14 @@ import json
 
 def get_filter_data(request):
     filtering = {k:None for k in 'id min_size max_size date_from date_to'.split()}
-    data = json.loads(request.data)
-    # Any key not in the list above is just ignored.
-    if data and 'filters' in data:
-        filters = data['filters']
-        for key in filters:
-            if key in filtering:
-                filtering[key] = filters[key]
+    if request.data:
+        data = json.loads(request.data)
+        # Any key not in the list above is just ignored.
+        if data and 'filters' in data:
+            filters = data['filters']
+            for key in filters:
+                if key in filtering:
+                    filtering[key] = filters[key]
     return filtering
 
 

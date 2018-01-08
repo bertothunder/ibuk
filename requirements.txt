@@ -5,6 +5,8 @@ Flask-RESTful==0.3.6
 itsdangerous==0.24
 Jinja2==2.10
 MarkupSafe==1.0
+marshmallow==2.15.0
+Marshmallow-Peewee==1.2.7
 peewee==2.10.2
 python-dateutil==2.6.1
 pytz==2017.3
