@@ -19,5 +19,5 @@ class EBookCreateSchema(ModelSchema):
         try:
             return Ebook.create(**data)
         except Exception as e:
-            print( 'Exception catched for ebook: "{}"'.format(e)    )
+            print( 'Exception catched for ebook: "{}"'.format(e) )
             return None
